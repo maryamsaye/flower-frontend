@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# Flower Delivery Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a full-stack flower delivery web application consisting of a **React frontend** and a **Node.js/Express backend** with **MongoDB** for data storage and **Multer** for image uploads. The application allows users to add, view, and delete flower products with images.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+##  Live Demo
 
-### `npm start`
+- **Frontend:** [https://your-frontend-url.onrender.com](https://flower-frontend-dggg.onrender.com)
+- **Backend:** [https://flower-delivery-site-2.onrender.com](https://flower-backend-utgk.onrender.com)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ **Presentation Video:**  
+[Watch on Loom]
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Frontend – React
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Features
 
-### `npm run build`
+- Add new flowers via a form with image upload
+- Display flowers in a responsive card grid
+- Preview uploaded images
+- Delete flowers
+- API integration with backend using `axios`
+- Custom CSS for styling
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Environment Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create a `.env` file in the `/client` directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```env
+REACT_APP_API_URL="https://flower-backend-utgk.onrender.com"
+ Getting Started
+bash
+Copy
+Edit
+cd client
+npm install        # Install dependencies
+npm start          # Run development server
+npm run build      # Create production build
+ Backend – Node.js, Express, MongoDB
+Features
+RESTful API for flower CRUD operations
 
-### `npm run eject`
+Image upload handling using multer
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Stores uploaded images in uploads/ directory
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Serves static image files
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Uses MongoDB via Mongoose for database operations
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+.env configuration for environment variables
 
-## Learn More
+ Environment Setup
+Create a .env file in the /server directory:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+env
+Copy
+Edit
+MONGO_URI=your_mongodb_connection_string
+PORT=4001
+ Getting Started
+bash
+Copy
+Edit
+cd server
+npm install         # Install backend dependencies
+npm start           # Start server in production mode
+npm run dev         # Start server with nodemon (development)
+ API Endpoints
+Method	Endpoint	Description
+GET	/api/flowers	Get all flowers
+POST	/api/flowers	Add a new flower
+DELETE	/api/flowers/:id	Delete a flower by ID
+GET	/uploads/:filename	Access uploaded image file
+GET	/api/users/getusers	Fetch sample user data
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ ##Static File Access
+Uploaded flower images are publicly accessible via:
 
-### Code Splitting
+bash
+Copy
+Edit
+https://flower-backend-utgk.onrender.com/api/flowers
+Example:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+bash
+Copy
+Edit
+https://flower-backend-utgk.onrender.com
+ Backend Dependencies
+express
 
-### Analyzing the Bundle Size
+mongoose
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+multer
 
-### Making a Progressive Web App
+dotenv
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+nodemon (development)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Author
+Name: Maryam Abdu Saye
+Email: marynsaye@gmail.com
+GitHub: https://github.com/maryamsaye/flower-backend.git
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
