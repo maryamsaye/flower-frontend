@@ -2,7 +2,13 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import './addFlower.css';
 
+
+
 const AddFlower = () => {
+
+  console.log('BODY ➜', req.body);
+  console.log('FILE ➜', req.file);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
