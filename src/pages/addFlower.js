@@ -50,11 +50,13 @@ const AddFlower = () => {
       data.append('Image', formData.Image);
 
     try {
-      await axios.post("https://flower-backend-utgk.onrender.com", data, {
+      await axios.post("https://flower-backend-utgk.onrender.com/api/flowers", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         }
       });
+      console.log('Sending form data:', [...data.entries()]);
+
       alert('Flower added successfully!');
       setFormData({
         title: '',
