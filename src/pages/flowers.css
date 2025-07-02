@@ -90,4 +90,8 @@
   background-color: rgb(128, 101, 101);
 }
 
-  
+  @media (min-width: 200px){
+    .flower-container{
+      padding: -10px;
+    }
+  }
