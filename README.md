@@ -6,8 +6,7 @@ This is a full-stack flower delivery web application consisting of a **React fro
 
 ##  Live Demo
 
-- **Frontend:** [https://your-frontend-url.onrender.com](https://flower-frontend-dggg.onrender.com)
-- **Backend:** [https://flower-delivery-site-2.onrender.com](https://flower-backend-utgk.onrender.com)
+- **Frontend:** [render-link](https://flower-frontend-dggg.onrender.com)
 
  **Presentation Video:**  
 [Watch on Loom](https://www.loom.com/share/293138af8e584d4797648fbc8e9def9b?sid=44e74f69-bca3-4f2a-b048-c72be99a91a3)
@@ -83,7 +82,7 @@ Uploaded flower images are publicly accessible via:
 bash
 Copy
 Edit
-https://flower-backend-utgk.onrender.com/api/flowers
+https://flower-frontend-dggg.onrender.com
 Example:
 
 bash
@@ -105,7 +104,7 @@ nodemon (development)
 ## Author
 Name: Maryam Abdu Saye
 Email: marynsaye@gmail.com
-GitHub: https://github.com/maryamsaye/flower-backend.git
+GitHub: https://github.com/maryamsaye/flower-frontend.git
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
