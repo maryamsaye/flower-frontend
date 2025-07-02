@@ -3,10 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-.flower-container {
-    padding: 20px;
-  }
-  
+
   .flower-title {
     text-align: center;
     font-size: 2rem;
