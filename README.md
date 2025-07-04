@@ -60,7 +60,7 @@ Copy
 Edit
 MONGO_URI=your_mongodb_connection_string
 PORT=4001
- Getting Started
+Getting Started
 bash
 Copy
 Edit
@@ -68,7 +68,7 @@ cd server
 npm install         # Install backend dependencies
 npm start           # Start server in production mode
 npm run dev         # Start server with nodemon (development)
- API Endpoints
+API Endpoints
 Method	Endpoint	Description
 GET	/api/flowers	Get all flowers
 POST	/api/flowers	Add a new flower
@@ -89,7 +89,7 @@ bash
 Copy
 Edit
 https://flower-backend-utgk.onrender.com
- Backend Dependencies
+Backend Dependencies
 express
 
 mongoose
@@ -99,6 +99,8 @@ multer
 dotenv
 
 nodemon (development)
+
+render (for deployment)
 
 
 ## Author
