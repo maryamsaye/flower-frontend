@@ -41,6 +41,11 @@ const AddFlower = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.Image) {
+      alert("Please upload an image before submitting.");
+      return;
+    }
+
     const data = new FormData();
     data.append('title', formData.title);
     data.append('description', formData.description);
@@ -48,16 +53,22 @@ const AddFlower = () => {
     data.append('category', formData.category);
     data.append('Image', formData.Image);
 
+    // Debug: log all FormData entries
+    for (let pair of data.entries()) {
+      console.log(pair[0] + ':', pair[1]);
+    }
+
     try {
-      await axios.post("https://flower-backend-utgk.onrender.com/api/flowers", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        }
-      });
+      const res = await axios.post(
+        "https://flower-backend-utgk.onrender.com/api/flowers",
+        data,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
 
-      console.log('Sending form data:', [...data.entries()]);
       alert('Flower added successfully!');
+      console.log("✅ Saved flower:", res.data);
 
+      // Reset form
       setFormData({
         title: '',
         description: '',
@@ -66,9 +77,10 @@ const AddFlower = () => {
         Image: null,
       });
       setPreviewImage(null);
-      fileInputRef.current.value = null;
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      
     } catch (error) {
-      console.error('Error adding flower:', error.response?.data || error.message);
+      console.error('❌ Error adding flower:', error.response?.data || error.message);
       alert('Failed to add flower. Check the console for details.');
     }
   };
@@ -77,6 +89,8 @@ const AddFlower = () => {
     <div className="add-flower-container">
       <h2>Add New Flower</h2>
       <form onSubmit={handleSubmit} className="flower-form">
+        
+        {/* Upload Box */}
         <div className="upload-box" onClick={handleUploadClick}>
           {previewImage ? (
             <img src={previewImage} alt="Preview" className="preview-image" />
@@ -117,7 +131,7 @@ const AddFlower = () => {
               <option value="Fresh Flowers">Fresh Flowers</option>
               <option value="Dried Flowers">Dried Flowers</option>
               <option value="Live Plants">Live Plants</option>
-              <option value="Aroma Candels">Aroma Candels</option>
+              <option value="Aroma Candles">Aroma Candles</option>
               <option value="Fresheners">Fresheners</option>
             </select>
           </div>
