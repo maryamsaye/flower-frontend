@@ -37,9 +37,9 @@ const Flowers = () => {
       <h1 className="flower-title">Flowers</h1>
       <div className="flower-grid">
         {flowers.map((flower) => {
-          const imageUrl = flower.Image?.startsWith('http')
-            ? flower.Image
-            : `${backendURL}${flower.Image}`;
+          const imageUrl = flower.image?.startsWith('http')
+            ? flower.image
+            : `${backendURL}${flower.image}`;
 
           return (
             <div className="flower-card" key={flower._id}>

@@ -1,3 +1,5 @@
+// frontend/src/components/AddFlower.js
+
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import './addFlower.css';
@@ -8,7 +10,7 @@ const AddFlower = () => {
     description: '',
     price: '',
     category: '',
-    Image: null,
+    image: null,   // ✅ lowercase
   });
 
   const [previewImage, setPreviewImage] = useState(null);
@@ -27,11 +29,11 @@ const AddFlower = () => {
     if (file) {
       setFormData((prev) => ({
         ...prev,
-        Image: file,
+        image: file,   // ✅ lowercase
       }));
       setPreviewImage(URL.createObjectURL(file));
     } else {
-      setFormData((prev) => ({ ...prev, Image: null }));
+      setFormData((prev) => ({ ...prev, image: null }));   // ✅ lowercase
       setPreviewImage(null);
     }
   };
@@ -41,7 +43,7 @@ const AddFlower = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.Image) {
+    if (!formData.image) {   // ✅ lowercase
       alert("Please upload an image before submitting.");
       return;
     }
@@ -51,7 +53,7 @@ const AddFlower = () => {
     data.append('description', formData.description);
     data.append('price', formData.price);
     data.append('category', formData.category);
-    data.append('Image', formData.Image);
+    data.append('image', formData.image);   // ✅ lowercase
 
     // Debug: log all FormData entries
     for (let pair of data.entries()) {
@@ -74,7 +76,7 @@ const AddFlower = () => {
         description: '',
         price: '',
         category: '',
-        Image: null,
+        image: null,
       });
       setPreviewImage(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
@@ -101,7 +103,7 @@ const AddFlower = () => {
 
         <input
           type="file"
-          name="Image"
+          name="image"    // ✅ lowercase
           accept="image/*"
           ref={fileInputRef}
           onChange={handleFileChange}
