@@ -1,168 +1,95 @@
-// frontend/src/components/AddFlower.js
-
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
-import './addFlower.css';
+// frontend/src/pages/AddFlower.js
+import { useState } from "react";
 
 const AddFlower = () => {
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    price: '',
-    category: '',
-    image: null,   // ✅ lowercase
-  });
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [category, setCategory] = useState("");
+  const [message, setMessage] = useState(null);
 
-  const [previewImage, setPreviewImage] = useState(null);
-  const fileInputRef = useRef(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData((prev) => ({
-        ...prev,
-        image: file,   // ✅ lowercase
-      }));
-      setPreviewImage(URL.createObjectURL(file));
-    } else {
-      setFormData((prev) => ({ ...prev, image: null }));   // ✅ lowercase
-      setPreviewImage(null);
-    }
-  };
-
-  const handleUploadClick = () => fileInputRef.current.click();
-
-  const handleSubmit = async (e) => {
+  const handleAddFlower = async (e) => {
     e.preventDefault();
-
-    if (!formData.image) {   // ✅ lowercase
-      alert("Please upload an image before submitting.");
-      return;
-    }
-
-    const data = new FormData();
-    data.append('title', formData.title);
-    data.append('description', formData.description);
-    data.append('price', formData.price);
-    data.append('category', formData.category);
-    data.append('image', formData.image);   // ✅ lowercase
-
-    // Debug: log all FormData entries
-    for (let pair of data.entries()) {
-      console.log(pair[0] + ':', pair[1]);
-    }
+    setMessage(null);
 
     try {
-      const res = await axios.post(
+      const res = await fetch(
         "https://flower-backend-utgk.onrender.com/api/flowers",
-        data,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, price, description, image, category }),
+        }
       );
 
-      alert('Flower added successfully!');
-      console.log("✅ Saved flower:", res.data);
+      const data = await res.json();
+      console.log("Add flower response:", data);
 
-      // Reset form
-      setFormData({
-        title: '',
-        description: '',
-        price: '',
-        category: '',
-        image: null,
-      });
-      setPreviewImage(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
-      
-    } catch (error) {
-      console.error('❌ Error adding flower:', error.response?.data || error.message);
-      alert('Failed to add flower. Check the console for details.');
+      if (!res.ok) {
+        setMessage(data.error || "Failed to add flower");
+        return;
+      }
+
+      setMessage("Flower added successfully ✅");
+      setTitle("");
+      setPrice("");
+      setDescription("");
+      setImage("");
+      setCategory("");
+    } catch (err) {
+      console.error("Add flower error:", err);
+      setMessage("Something went wrong. Try again later.");
     }
   };
 
   return (
     <div className="add-flower-container">
-      <h2>Add New Flower</h2>
-      <form onSubmit={handleSubmit} className="flower-form">
-        
-        {/* Upload Box */}
-        <div className="upload-box" onClick={handleUploadClick}>
-          {previewImage ? (
-            <img src={previewImage} alt="Preview" className="preview-image" />
-          ) : (
-            <div>📷 Upload</div>
-          )}
-        </div>
+      <h2>Add Flower</h2>
+      <form onSubmit={handleAddFlower}>
+        <input
+          type="text"
+          placeholder="Flower Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
 
         <input
-          type="file"
-          name="image"    // ✅ lowercase
-          accept="image/*"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          hidden
+          type="number"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          required
+        />
+
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        ></textarea>
+
+        <input
+          type="text"
+          placeholder="Image URL"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          required
         />
 
         <input
           type="text"
-          name="title"
-          placeholder="Title"
-          value={formData.title}
-          onChange={handleChange}
+          placeholder="Category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           required
         />
 
-        <div className="row">
-          <div className="category">
-            <label>Category</label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              required
-              className="select"
-            >
-              <option value="">-- Select Category --</option>
-              <option value="Fresh Flowers">Fresh Flowers</option>
-              <option value="Dried Flowers">Dried Flowers</option>
-              <option value="Live Plants">Live Plants</option>
-              <option value="Aroma Candles">Aroma Candles</option>
-              <option value="Fresheners">Fresheners</option>
-            </select>
-          </div>
-
-          <div className="price">
-            <label>Price</label>
-            <input
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              required
-              min="0"
-            />
-          </div>
-        </div>
-
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        ></textarea>
-
-        <button className="submit-btn" type="submit">
-          SUBMIT
-        </button>
+        <button type="submit">Add Flower</button>
       </form>
+
+      {message && <p>{message}</p>}
     </div>
   );
 };
