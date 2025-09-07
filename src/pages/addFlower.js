@@ -1,4 +1,4 @@
-import "../Addflower/AddFlower.css";
+import "./addFlower.css";
 import { useState } from "react";
 import UploadCloud from "../Icons/cloud-upload.svg";
 

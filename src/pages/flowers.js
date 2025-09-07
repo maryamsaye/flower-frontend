@@ -10,7 +10,7 @@ const Flowers = () => {
   useEffect(() => {
     const fetchFlowers = async () => {
       try {
-        const res = await axios.get(`${backendURL}/api/flowers`, { withCredentials: true });
+        const res = await axios.get(`${REACT_APP_API_URL}/api/flowers`, { withCredentials: true });
         setFlowers(res.data);
       } catch (err) {
         console.error('Error fetching flowers:', err);
