@@ -15,7 +15,7 @@ const AddFlower = () => {
 
     try {
       const res = await fetch(
-        "https://flower-backend-utgk.onrender.com/api/flowers",
+        "https://flower-app-jp7a.onrender.com",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
