@@ -5,7 +5,7 @@ import './flowers.css';
 const Flowers = () => {
   const [flowers, setFlowers] = useState([]);
 
-  const backendURL = process.env.REACT_APP_API_URL || 'https://flower-backend-utgk.onrender.com';
+  const backendURL = process.env.REACT_APP_API_URL || 'https://flower-app-jp7a.onrender.com';
 
   useEffect(() => {
     const fetchFlowers = async () => {

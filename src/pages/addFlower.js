@@ -44,7 +44,7 @@ const AddFlowers = () => {
 
     try {
       const res = await fetch(
-        "https://flower-app-jp7a.onrender.com",
+        "https://flower-app-jp7a.onrender.com/api/flowers",
         {
           method: "POST",
           body: formData,
