@@ -5,12 +5,12 @@ import './flowers.css';
 const Flowers = () => {
   const [flowers, setFlowers] = useState([]);
 
-  const backendURL = process.env.REACT_APP_API_URL || 'https://flower-app-jp7a.onrender.com';
+  const backendURL = process.env.REACT_APP_API_URL || 'https://flower-backend-utgk.onrender.com';
 
   useEffect(() => {
     const fetchFlowers = async () => {
       try {
-        const res = await axios.get(`${REACT_APP_API_URL}/api/flowers`, { withCredentials: true });
+        const res = await axios.get(`${backendURL}/api/flowers`, { withCredentials: true });
         setFlowers(res.data);
       } catch (err) {
         console.error('Error fetching flowers:', err);
@@ -23,8 +23,8 @@ const Flowers = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this flower?')) {
       try {
-        await axios.delete(`${REACT_APP_API_URL}/api/flowers/${id}`, { withCredentials: true });
-        const res = await axios.get(`${REACT_APP_API_URL}/api/flowers`, { withCredentials: true });
+        await axios.delete(`${backendURL}/api/flowers/${id}`, { withCredentials: true });
+        const res = await axios.get(`${backendURL}/api/flowers`, { withCredentials: true });
         setFlowers(res.data);
       } catch (error) {
         console.error('Error deleting flower:', error);
