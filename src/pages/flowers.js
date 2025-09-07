@@ -23,8 +23,8 @@ const Flowers = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this flower?')) {
       try {
-        await axios.delete(`${backendURL}/api/flowers/${id}`, { withCredentials: true });
-        const res = await axios.get(`${backendURL}/api/flowers`, { withCredentials: true });
+        await axios.delete(`${REACT_APP_API_URL}/api/flowers/${id}`, { withCredentials: true });
+        const res = await axios.get(`${REACT_APP_API_URL}/api/flowers`, { withCredentials: true });
         setFlowers(res.data);
       } catch (error) {
         console.error('Error deleting flower:', error);
