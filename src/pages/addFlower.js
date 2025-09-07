@@ -126,10 +126,10 @@ const AddFlowers = () => {
               className="select"
             >
               <option value="">-- Select Category --</option>
-              <option value="Fresh Flowers">Fresh Flowers</option>
-              <option value="Dried Flowers">Dried Flowers</option>
-              <option value="Live Plants">Live Plants</option>
-              <option value="Aroma Candels">Aroma Candels</option>
+              <option value="Fresh">Fresh Flowers</option>
+              <option value="Dried">Dried Flowers</option>
+              <option value="Live">Live Plants</option>
+              <option value="Aroma">Aroma Candels</option>
               <option value="Fresheners">Fresheners</option>
             </select>
           </div>
