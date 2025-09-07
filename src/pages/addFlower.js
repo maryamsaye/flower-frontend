@@ -1,6 +1,5 @@
 import "./addFlower.css";
 import { useState } from "react";
-import UploadCloud from "../Icons/cloud-upload.svg";
 
 const AddFlowers = () => {
   const [form, setForm] = useState({
@@ -96,9 +95,6 @@ const AddFlowers = () => {
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label htmlFor="imageInput">Image</label>
         <label htmlFor="imageInput" className="upload-box">
-          {preview  (
-            <img src={preview} alt="preview" className="preview" />
-          ) }
         </label>
         <input
           id="imageInput"
