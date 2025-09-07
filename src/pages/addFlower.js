@@ -96,11 +96,9 @@ const AddFlowers = () => {
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label htmlFor="imageInput">Image</label>
         <label htmlFor="imageInput" className="upload-box">
-          {preview ? (
+          {preview  (
             <img src={preview} alt="preview" className="preview" />
-          ) : (
-            <img className="cloud" src={UploadCloud} alt="upload-icon" />
-          )}
+          ) }
         </label>
         <input
           id="imageInput"
