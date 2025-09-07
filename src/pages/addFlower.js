@@ -1,5 +1,6 @@
 // frontend/src/pages/AddFlower.js
 import { useState } from "react";
+import "./addFlower.css"
 
 const AddFlower = () => {
   const [title, setTitle] = useState("");
