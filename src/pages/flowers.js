@@ -46,10 +46,10 @@ const Flowers = () => {
               <img
                 src={imageUrl}
                 className="flower-image"
-                alt={flower.title}
+                alt={flower.name}
               />
               <div className="flower-details">
-                <h3>{flower.title}</h3>
+                <h3>{flower.name}</h3>
                 <p>{flower.description}</p>
                 <p className="category">Category: {flower.category}</p>
                 <p className="price">${flower.price}</p>

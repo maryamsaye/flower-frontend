@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+  form {
+    width: 100%
+  }
+  .flower-container {
+    width: 100%
+  }
+
   .flower-title {
     text-align: center;
     font-size: 2rem;
@@ -28,12 +35,12 @@
     padding: 10px;
     background-color: #fdfdfd;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
+    width: 100%;
   }
   
   .flower-image {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0;
@@ -90,8 +97,4 @@
   background-color: rgb(128, 101, 101);
 }
 
-  @media (min-width: 200px){
-    .flower-container{
-      padding: -10px;
-    }
-  }
+  
