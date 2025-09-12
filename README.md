@@ -6,7 +6,7 @@ This is a full-stack flower delivery web application consisting of a **React fro
 
 ##  Live Demo
 
-- **Frontend:** [render-link](https://flower-frontend-dggg.onrender.com)
+- **Frontend:** [render-link](https://flower-frontend-admin.onrender.com)
 
  **Presentation Video:**  
 [Watch on Loom](https://www.loom.com/share/293138af8e584d4797648fbc8e9def9b?sid=44e74f69-bca3-4f2a-b048-c72be99a91a3)
@@ -29,7 +29,7 @@ This is a full-stack flower delivery web application consisting of a **React fro
 Create a `.env` file in the `/client` directory:
 
 ```env
-REACT_APP_API_URL="https://flower-backend-utgk.onrender.com"
+REACT_APP_API_URL="https://flower-app-jp7a.onrender.com"
  Getting Started
 bash
 Copy
@@ -82,13 +82,13 @@ Uploaded flower images are publicly accessible via:
 bash
 Copy
 Edit
-https://flower-frontend-dggg.onrender.com
+https://flower-frontend-admin.onrender.com
 Example:
 
 bash
 Copy
 Edit
-https://flower-backend-utgk.onrender.com
+https://flower-app-jp7a.onrender.com
 Backend Dependencies
 express
 
