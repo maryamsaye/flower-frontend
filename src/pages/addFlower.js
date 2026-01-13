@@ -1,143 +1,168 @@
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
-import './addFlower.css';
+import "./addFlower.css";
+import { useState } from "react";
+import UploadCloud from "../assets/UploadCloud.svg";
 
 
-
-const AddFlower = () => {
-
-
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    price: '',
-    category: '',
-    Image: null,
+const AddFlowers = () => {
+  const [form, setForm] = useState({
+    name: "",
+    category: "",
+    price: "",
+    description: "",
   });
-
-  const [previewImage, setPreviewImage] = useState(null);
-  const fileInputRef = useRef(null);
-
+  const [image, setImage] = useState(null);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
+  const [preview, setPreview] = useState(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+
+    setForm({
+      ...form,
+      [fieldName]: fieldValue,
+    });
   };
 
-  const handleFileChange = (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData((prev) => ({
-        ...prev,
-        Image: file,
-      }));
-      setPreviewImage(URL.createObjectURL(file));
-    } else {
-      setFormData((prev) => ({ ...prev, Image: null }));
-      setPreviewImage(null);
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
     }
   };
-
-  const handleUploadClick = () => fileInputRef.current.click();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
 
-    const data = new FormData();
-      data.append('title', formData.title);
-      data.append('description', formData.description);
-      data.append('price', formData.price);
-      data.append('category', formData.category);
-      data.append('Image', formData.Image);
+    for (const [key, value] of Object.entries(form)) {
+      formData.append(key, value);
+    }
+    if (image) {
+      formData.append("image", image);
+    }
 
     try {
-      await axios.post("https://flower-backend-utgk.onrender.com/api/flowers", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      const res = await fetch(
+        "https://flower-app-jp7a.onrender.com/api/flowers",
+        {
+          method: "POST",
+          body: formData,
         }
-      });
-      console.log('Sending form data:', [...data.entries()]);
+      );
 
-      alert('Flower added successfully!');
-      setFormData({
-        title: '',
-        description: '',
-        price: '',
-        category: '',
-        Image: null,
-      });
-      setPreviewImage(null);
-      fileInputRef.current.value = null;
-    } catch (error) {
-      console.error('Error adding flower:', error.response?.data || error.message);
-      alert('Failed to add flower. Check the console for details.');
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(errText);
+      }
+
+      const result = await res.json();
+
+      if (res.ok) {
+        setMessage("🌸 Flower Submitted Successfully!");
+        setMessageType("success");
+
+        setForm({
+          name: "",
+          category: "",
+          price: "",
+          description: "",
+        });
+
+        setImage(null);
+        setPreview(null);
+        document.getElementById("imageInput").value = null;
+      } else {
+        console.error("Upload failed", result);
+        setMessage("❌ Failed to submit flower.");
+        setMessageType("error");
+      }
+    } catch (err) {
+      console.error("Error submitting flower:", err);
+      setMessage("❌ Something went wrong.");
+      setMessageType("error");
     }
+
+    setTimeout(() => {
+      setMessage("");
+      setMessageType("");
+    }, 4000);
   };
 
   return (
-    <div className="add-flower-container">
-      <h2>Add New Flower</h2>
-      <form onSubmit={handleSubmit} className="flower-form">
-        <div className="upload-box" onClick={handleUploadClick}>
-          {previewImage ? (
-            <img src={previewImage} alt="Preview" className="preview-image" />
+    <div className="container">
+      {message && <div className={`alert ${messageType}`}>{message}</div>}
+       <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <label htmlFor="imageInput">Image</label>
+        <label htmlFor="imageInput" className="upload-box">
+          {preview ? (
+            <img src={preview} alt="preview" className="preview" />
           ) : (
-            <div>📷 Upload</div>
+            <img className="cloud" src={UploadCloud} alt="upload-icon" />
           )}
-        </div>
+        </label>
         <input
+          id="imageInput"
+          className="upload-box"
           type="file"
-          name="Image"
+          style={{ display: "none" }}
+          onChange={handleImageChange}
           accept="image/*"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          hidden
+          required
         />
-
+        <label>Name</label>
         <input
           type="text"
-          name="title"
-          placeholder="Title"
-          value={formData.title}
+          name="name"
+          value={form.name}
           onChange={handleChange}
           required
         />
 
-        <div className="input-row">
-          <input
-            type="text"
-            name="category"
-            placeholder="Category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-            min="0"
-          />
+        <div className="row">
+          <div className="category">
+            <label>Category</label>
+            <select
+              type="text"
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+              required
+              className="select"
+            >
+              <option value="">-- Select Category --</option>
+              <option value="Fresh">Fresh Flowers</option>
+              <option value="Dried">Dried Flowers</option>
+              <option value="Live">Live Plants</option>
+              <option value="Aroma">Aroma Candels</option>
+              <option value="Fresheners">Fresheners</option>
+            </select>
+          </div>
+          <div className="price">
+            <label>Price</label>
+            <input
+              type="number"
+              name="price"
+              value={form.price}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
-
+        <label>Description</label>
         <textarea
           name="description"
-          placeholder="Description"
-          value={formData.description}
+          value={form.description}
           onChange={handleChange}
           required
-        />
-
-        <button type="submit">Submit</button>
+        ></textarea>
+        <button className="submit-btn" type="submit">
+          SUBMIT
+        </button>
       </form>
     </div>
   );
 };
-
-export default AddFlower;
+export default AddFlowers;

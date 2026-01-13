@@ -5,7 +5,7 @@ import './flowers.css';
 const Flowers = () => {
   const [flowers, setFlowers] = useState([]);
 
-  const backendURL = process.env.REACT_APP_API_URL || 'https://flower-backend-utgk.onrender.com';
+  const backendURL = process.env.REACT_APP_API_URL || 'https://flower-app-jp7a.onrender.com';
 
   useEffect(() => {
     const fetchFlowers = async () => {
@@ -37,19 +37,19 @@ const Flowers = () => {
       <h1 className="flower-title">Flowers</h1>
       <div className="flower-grid">
         {flowers.map((flower) => {
-          const imageUrl = flower.Image?.startsWith('http')
-            ? flower.Image
-            : `${backendURL}${flower.Image}`;
+          const imageUrl = flower.image?.startsWith('http')
+            ? flower.image
+            : `${backendURL}${flower.image}`;
 
           return (
             <div className="flower-card" key={flower._id}>
               <img
                 src={imageUrl}
                 className="flower-image"
-                alt={flower.title}
+                alt={flower.name}
               />
               <div className="flower-details">
-                <h3>{flower.title}</h3>
+                <h3>{flower.name}</h3>
                 <p>{flower.description}</p>
                 <p className="category">Category: {flower.category}</p>
                 <p className="price">${flower.price}</p>

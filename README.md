@@ -6,7 +6,7 @@ This is a full-stack flower delivery web application consisting of a **React fro
 
 ##  Live Demo
 
-- **Frontend:** [render-link](https://flower-frontend-dggg.onrender.com)
+- **Frontend:** [render-link](https://flower-frontend-admin.onrender.com)
 
  **Presentation Video:**  
 [Watch on Loom](https://www.loom.com/share/293138af8e584d4797648fbc8e9def9b?sid=44e74f69-bca3-4f2a-b048-c72be99a91a3)
@@ -29,7 +29,7 @@ This is a full-stack flower delivery web application consisting of a **React fro
 Create a `.env` file in the `/client` directory:
 
 ```env
-REACT_APP_API_URL="https://flower-backend-utgk.onrender.com"
+REACT_APP_API_URL="https://flower-app-jp7a.onrender.com"
  Getting Started
 bash
 Copy
@@ -60,7 +60,7 @@ Copy
 Edit
 MONGO_URI=your_mongodb_connection_string
 PORT=4001
- Getting Started
+Getting Started
 bash
 Copy
 Edit
@@ -68,7 +68,7 @@ cd server
 npm install         # Install backend dependencies
 npm start           # Start server in production mode
 npm run dev         # Start server with nodemon (development)
- API Endpoints
+API Endpoints
 Method	Endpoint	Description
 GET	/api/flowers	Get all flowers
 POST	/api/flowers	Add a new flower
@@ -82,14 +82,14 @@ Uploaded flower images are publicly accessible via:
 bash
 Copy
 Edit
-https://flower-frontend-dggg.onrender.com
+https://flower-frontend-admin.onrender.com
 Example:
 
 bash
 Copy
 Edit
-https://flower-backend-utgk.onrender.com
- Backend Dependencies
+https://flower-app-jp7a.onrender.com
+Backend Dependencies
 express
 
 mongoose
@@ -99,6 +99,8 @@ multer
 dotenv
 
 nodemon (development)
+
+render (for deployment)
 
 
 ## Author
